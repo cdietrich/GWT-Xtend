@@ -20,6 +20,9 @@ class GwtModuleUtils {
         <module rename-to="«annotatedClass.moduleName»">
             <!-- Inherit the core Web Toolkit stuff.                        -->
             <inherits name='com.google.gwt.user.User' />
+            <!-- Inherits the Xtend GWT library -->
+            <inherits name='org.eclipse.xtend.lib.Lib' />
+            <inherits name='org.eclipse.xtext.xbase.lib.Lib'/>
         
             <!-- We need the JUnit module in the main module,               -->
             <!-- otherwise eclipse complains (Google plugin bug?)           -->
