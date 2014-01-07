@@ -29,17 +29,9 @@
 			<version>${gwtVersion}</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.7</version>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
 
 	<build>
- 		<!-- Important for GWT -->
-<!-- 		<outputDirectory>${basedir}/src/main/webapp/WEB-INF/classes</outputDirectory> -->
 		<plugins>
 			<!-- GWT Maven Plugin -->
 			<plugin>

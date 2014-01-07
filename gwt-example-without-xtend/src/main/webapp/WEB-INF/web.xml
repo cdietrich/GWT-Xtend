@@ -13,12 +13,12 @@
 
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/gwt-example/greet</url-pattern>
+    <url-pattern>/GwtExample/greet</url-pattern>
   </servlet-mapping>
 
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>gwt-example.html</welcome-file>
+    <welcome-file>GwtExample.html</welcome-file>
   </welcome-file-list>
 
 </web-app>

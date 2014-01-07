@@ -18,6 +18,9 @@
 
   <!-- Specify the app entry point class.                         -->
   <entry-point class='org.gwtxtend.example.client.GwtExample' />
+  
+  <!-- Servlets -->
+  <servlet path='/greet' class='org.gwtxtend.example.server.GreetingServiceImpl'/>
 
   <!-- Specify the paths for translatable code                    -->
   <source path='client' />

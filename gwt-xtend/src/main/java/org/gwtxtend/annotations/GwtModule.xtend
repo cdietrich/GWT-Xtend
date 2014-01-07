@@ -22,6 +22,7 @@ class GwtModuleProcessor extends AbstractClassProcessor {
     private extension TransformationContext tContext
     private extension GwtModuleUtils moduleUtils
     private extension GwtHtmlUtils htmlUtils
+    private extension GwtWebUtils webUtils
 
     override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
         tContext = context
@@ -30,7 +31,8 @@ class GwtModuleProcessor extends AbstractClassProcessor {
 
     override doGenerateCode(ClassDeclaration annotatedClass, extension CodeGenerationContext context) {
         moduleUtils = new GwtModuleUtils(tContext, context)
-        htmlUtils = new GwtHtmlUtils(moduleUtils)
+        htmlUtils = new GwtHtmlUtils()
+        webUtils = new GwtWebUtils(tContext, context)
 
         createModuleFile(annotatedClass, context)
         createWebXml(annotatedClass, context)
@@ -39,41 +41,28 @@ class GwtModuleProcessor extends AbstractClassProcessor {
 
     def createModuleFile(ClassDeclaration annotatedClass, extension CodeGenerationContext context) {
         val targetFolder = annotatedClass.compilationUnit.filePath.targetFolder
-        val moduleFile = targetFolder.append(annotatedClass.modulePath)
+        val moduleFile = targetFolder.append(annotatedClass.modulePath.toString)
 
         if (!moduleFile.exists) {
             moduleFile.contents = annotatedClass.createDefaultModule
         }
     }
 
-    def private getModulePath(ClassDeclaration annotatedClass) {
-        return annotatedClass.qualifiedName.replace('.', '/').replace(annotatedClass.simpleName,
-            annotatedClass.moduleName) + ".gwt.xml"
-    }
-
+    def private getModulePath(ClassDeclaration annotatedClass) '''
+        «annotatedClass.qualifiedName.replace('.', '/').replace('client', '').replace(annotatedClass.simpleName,
+            annotatedClass.moduleName)».gwt.xml
+    '''
     def createWebXml(ClassDeclaration annotatedClass, extension CodeGenerationContext context) {
-        val webXml = annotatedClass.getWebappFolder(context).append("WEB-INF/web.xml")
-        webXml.contents = GwtWebUtils.newWebXml(annotatedClass, tContext, context)
+        val webXml = annotatedClass.webXml
+        if(!webXml.exists) {
+            webXml.contents = annotatedClass.newWebXml 
+        }
     }
 
     def createWelcomePage(ClassDeclaration annotatedClass, extension CodeGenerationContext context) {
-        val welcomePage = annotatedClass.getWebappFolder(context).append(annotatedClass.welcomePage)
+        val welcomePage = annotatedClass.webappFolder.append(annotatedClass.welcomePage)
         if (!welcomePage.exists) {
-            welcomePage.contents = annotatedClass.newWelcomePage 
+            welcomePage.contents = annotatedClass.newWelcomePage(annotatedClass.moduleName)
         }
-    }
-
-    def private getWebappFolder(ClassDeclaration annotatedClass, extension CodeGenerationContext context) {
-        return annotatedClass.compilationUnit.filePath.projectFolder.append("src/main/webapp")
-    }
-
-    def private getWelcomePage(ClassDeclaration annotatedClass) {
-        val welcomePage = annotatedClass.gwtModule.getValue('welcomePage') as String
-        if (welcomePage == null || welcomePage.length == 0) {
-            return annotatedClass.simpleName + '.html'
-        } else if (welcomePage.contains('.')) {
-            return welcomePage
-        }
-        return welcomePage + '.html'
     }
 }

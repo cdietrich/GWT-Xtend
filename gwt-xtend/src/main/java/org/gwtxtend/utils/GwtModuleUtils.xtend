@@ -52,7 +52,17 @@ class GwtModuleUtils {
         return moduleName
     }
     
-    def getGwtModule(ClassDeclaration annotatedClass) {
+    def getWelcomePage(ClassDeclaration annotatedClass) {
+        val welcomePage = annotatedClass.gwtModule.getValue('welcomePage') as String
+        if (welcomePage == null || welcomePage.length == 0) {
+            return annotatedClass.simpleName + '.html'
+        } else if (welcomePage.contains('.')) {
+            return welcomePage
+        }
+        return welcomePage + '.html'
+    }
+    
+    def private getGwtModule(ClassDeclaration annotatedClass) {
         return annotatedClass.findAnnotation(GwtModule.newTypeReference().type)
     }
 }

@@ -4,13 +4,7 @@ import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 
 class GwtHtmlUtils {
 
-    private extension GwtModuleUtils moduleUtils
-
-    new(GwtModuleUtils moduleUtils) {
-        this.moduleUtils = moduleUtils
-    }
-
-    def newWelcomePage(ClassDeclaration annotatedClass) '''
+    def newWelcomePage(ClassDeclaration annotatedClass, String moduleName) '''
         <!doctype html>
         <!-- The DOCTYPE declaration above will set the    -->
         <!-- browser's rendering engine into               -->
@@ -25,19 +19,19 @@ class GwtHtmlUtils {
                 <!--                                                               -->
                 <!-- Consider inlining CSS to reduce the number of requested files -->
                 <!--                                                               -->
-                <link type="text/css" rel="stylesheet" href="gwxtend.css">
+                <link type="text/css" rel="stylesheet" href="«moduleName».css">
         
                 <!--                                           -->
                 <!-- Any title is fine                         -->
                 <!--                                           -->
-                <title>«annotatedClass.moduleName»</title>
+                <title>«moduleName»</title>
         
                 <!--                                           -->
                 <!-- This script loads your compiled module.   -->
                 <!-- If you add any GWT meta tags, they must   -->
                 <!-- be added before this line.                -->
                 <!--                                           -->
-                <script type="text/javascript" language="javascript" src="gwxtend/gwxtend.nocache.js"></script>
+                <script type="text/javascript" language="javascript" src="«moduleName»/«moduleName».nocache.js"></script>
             </head>
         
             <!--                                           -->
