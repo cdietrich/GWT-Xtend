@@ -1,13 +1,13 @@
 package org.gwtxtend.annotations
 
-import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor
-import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.CodeGenerationContext
 import org.eclipse.xtend.lib.macro.TransformationContext
+import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 
-import static extension org.gwxtend.utils.XmlUtils.*
+import static extension org.gwtxtend.utils.XmlUtils.*
 
 @Active(GwtServiceProcessor)
 annotation GwtService {
