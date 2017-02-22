@@ -13,9 +13,9 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<versions.gwt>2.5.1</versions.gwt>
-		<versions.jdk>1.6</versions.jdk>
-		<versions.xtend>2.5.0</versions.xtend>
+		<versions.gwt>2.8.0</versions.gwt>
+		<versions.jdk>1.8</versions.jdk>
+		<versions.xtend>2.12.0-SNAPSHOT</versions.xtend>
 	</properties>
 
 	<dependencyManagement>
@@ -38,17 +38,17 @@
 			<dependency>
 				<groupId>org.eclipse.xtend</groupId>
 				<artifactId>org.eclipse.xtend.lib</artifactId>
-				<version>${versions.xtend}</version>
+				<version>2.12.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.xtend</groupId>
 				<artifactId>org.eclipse.xtend.lib.gwt</artifactId>
-				<version>${versions.xtend}</version>
+				<version>2.12.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.xtext</groupId>
 				<artifactId>org.eclipse.xtext.xbase.lib.gwt</artifactId>
-				<version>${versions.xtend}</version>
+				<version>2.12.0-SNAPSHOT</version>
 			</dependency>
 
 			<!-- Project Modules -->
@@ -116,7 +116,11 @@
 							<goal>compile</goal>
 							<goal>test</goal>
 						</goals>						
+						<configuration>
+							<logLevel>DEBUG</logLevel>
+						</configuration>
 					</execution>
+					
 				</executions>
 			</plugin>
 

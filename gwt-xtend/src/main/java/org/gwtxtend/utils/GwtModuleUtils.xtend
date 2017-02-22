@@ -33,6 +33,7 @@ class GwtModuleUtils {
             <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
         
             <!-- Other module inherits                                      -->
+            <inherits name='org.eclipse.xtend.lib.Lib' />
         
             <!-- Specify the app entry point class.                         -->
             <entry-point class='«annotatedClass.qualifiedName»' />
